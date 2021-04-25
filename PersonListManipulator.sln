@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31005.135
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PersonListManipulator", "PersonListManipulator.csproj", "{5CB3A798-6D73-4ED6-A1CE-FA51A3713123}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5CB3A798-6D73-4ED6-A1CE-FA51A3713123}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5CB3A798-6D73-4ED6-A1CE-FA51A3713123}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5CB3A798-6D73-4ED6-A1CE-FA51A3713123}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5CB3A798-6D73-4ED6-A1CE-FA51A3713123}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A7DCB854-3FE0-4A48-8807-D98018BAF9E4}
+	EndGlobalSection
+EndGlobal
