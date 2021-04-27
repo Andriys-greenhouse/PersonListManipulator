@@ -5,8 +5,53 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonListManipulator"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="Personal" Height="450" Width="800"
+        FontSize="20">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ListView x:Name="PersonView" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="5"
+                  ItemsSource="{Binding ExistingPersons}" SelectionChanged="PersonView_SelectionChanged">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding Name}"/>
+                        <TextBlock Text=" "/>
+                        <TextBlock Text="{Binding Surname}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+
+        <StackPanel Grid.Column="2" Grid.Row="1" Orientation="Vertical" Margin="5">
+            <TextBlock Text="Jméno:"/>
+            <TextBlock Text="{Binding Name}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="2" Orientation="Vertical" Margin="5">
+            <TextBlock Text="Přijmení:"/>
+            <TextBlock Text="{Binding Surname}"/>
+        </StackPanel>
+        <StackPanel Grid.Column="2" Grid.Row="3" Orientation="Vertical" Margin="5">
+            <TextBlock Text="Datum narození:"/>
+            <TextBlock Text="{Binding FormatedBirthDate}"/>
+        </StackPanel>
+
+        <Button x:Name="Add" Grid.Column="1" Grid.Row="4" Content="Přidat"
+                Margin="5" Click="Add_Click"/>
+        <Button x:Name="Delete" Grid.Column="2" Grid.Row="4" Content="Odstranit"
+                Margin="5" Click="Delete_Click"/>
     </Grid>
 </Window>

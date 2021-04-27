@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,9 +21,42 @@ namespace PersonListManipulator
     /// </summary>
     public partial class MainWindow : Window
     {
+        Person neu = new Person();
         public MainWindow()
         {
+            Person.ExistingPersons.Remove(neu);
             InitializeComponent();
+            Person.InitializeTestSubjects();
+            if (Person.ExistingPersons.Count > 0) { DataContext = Person.ExistingPersons[0]; }
+            else { DataContext = neu; }
+        }
+
+        private void PersonView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (PersonView.SelectedIndex >= 0) { DataContext = Person.ExistingPersons[PersonView.SelectedIndex]; }
+            else { DataContext = neu; }
+        }
+
+        private void Add_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void Delete_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult confirmation = MessageBox.Show($"Opravdu chcete permanentně odstranit položku {Person.ExistingPersons[PersonView.SelectedIndex].Name} {Person.ExistingPersons[PersonView.SelectedIndex].Surname}?", "Potvrzení", MessageBoxButton.YesNo);
+            switch (confirmation)
+            {
+                case MessageBoxResult.Yes:
+                    Person.ExistingPersons.RemoveAt(PersonView.SelectedIndex);
+                    break;
+                case MessageBoxResult.No:
+                    DataContext = neu;
+                    break;
+                default:
+                    DataContext = neu;
+                    break;
+            }
         }
     }
 }
