@@ -39,7 +39,7 @@ namespace PersonListManipulator
 
         private void Add_Click(object sender, RoutedEventArgs e)
         {
-
+            new Individual().ShowDialog();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
@@ -57,6 +57,11 @@ namespace PersonListManipulator
                     DataContext = neu;
                     break;
             }
+        }
+
+        private void PersonView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new Individual(Person.ExistingPersons[PersonView.SelectedIndex]).ShowDialog();
         }
     }
 }

@@ -24,7 +24,8 @@
         </Grid.RowDefinitions>
 
         <ListView x:Name="PersonView" Grid.Column="1" Grid.Row="1" Grid.RowSpan="3" Margin="5"
-                  ItemsSource="{Binding ExistingPersons}" SelectionChanged="PersonView_SelectionChanged">
+                  ItemsSource="{Binding ExistingPersons}" SelectionChanged="PersonView_SelectionChanged"
+                  MouseDoubleClick="PersonView_MouseDoubleClick">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <StackPanel Orientation="Horizontal">

@@ -5,10 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PersonListManipulator"
         mc:Ignorable="d"
-        Title="Individual" Height="450" Width="800">
+        Title="Individual" Height="450" Width="800"
+        FontSize="20">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
@@ -26,5 +30,39 @@
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Orientation="Vertical" Grid.ColumnSpan="3">
+            <TextBlock Text="Jméno:" Grid.ColumnSpan="1"/>
+            <TextBox x:Name="NameBox" Text="{Binding Name}" TextChanged="NameBox_TextChanged" Grid.ColumnSpan="2"/>
+            <TextBlock Text="{Binding NameErrText, UpdateSourceTrigger=PropertyChanged}" Height="{Binding NameErrHeight, UpdateSourceTrigger=PropertyChanged}" 
+                       Visibility="{Binding NameErrVis, UpdateSourceTrigger=PropertyChanged}" 
+                       Foreground="Red" FontSize="12" Grid.ColumnSpan="3"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="2" Orientation="Vertical" Grid.ColumnSpan="3">
+            <TextBlock Text="Přijmení:" Grid.ColumnSpan="1"/>
+            <TextBox x:Name="SurnameBox" Text="{Binding Surname}" TextChanged="SurnameBox_TextChanged" Grid.ColumnSpan="2"/>
+            <TextBlock Text="{Binding SurnameErrText, UpdateSourceTrigger=PropertyChanged}" Height="{Binding SurnameErrHeight, UpdateSourceTrigger=PropertyChanged}" 
+                       Visibility="{Binding SurnameErrVis, UpdateSourceTrigger=PropertyChanged}" 
+                       Foreground="Red" FontSize="12" Grid.ColumnSpan="3"/>
+        </StackPanel>
+        <StackPanel Grid.Column="1" Grid.Row="3" Orientation="Vertical" Grid.ColumnSpan="4">
+            <TextBlock Text="Datum narození:" Grid.ColumnSpan="1"/>
+            <StackPanel Orientation="Horizontal" Grid.ColumnSpan="4">
+                <TextBlock Text="Rok:"/>
+                <TextBox x:Name="YearBox" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" TextChanged="YearBox_TextChanged"/>
+                <TextBlock Text="Měsíc:"/>
+                <TextBox x:Name="MonthBox" Text="{Binding Month, UpdateSourceTrigger=PropertyChanged}" TextChanged="MonthBox_TextChanged"/>
+                <TextBlock Text="Den:"/>
+                <TextBox x:Name="DayBox" Text="{Binding Day, UpdateSourceTrigger=PropertyChanged}" TextChanged="DayBox_TextChanged"/>
+            </StackPanel>
+            <TextBlock Text="{Binding BirthErrText, UpdateSourceTrigger=PropertyChanged}" Height="auto"
+                       Visibility="{Binding BirthErrVis, UpdateSourceTrigger=PropertyChanged}" 
+                       Foreground="Red" FontSize="12" Grid.ColumnSpan="3"/>
+        </StackPanel>
+
+        <Button Grid.Column="1" Grid.Row="4" x:Name="AddButt" Content="Přidat/změnit" Click="AddButt_Click"
+                Margin="5" Grid.ColumnSpan="2"/>
+        <Button Grid.Column="4" Grid.Row="4" x:Name="CancelButt" Content="Zrušit" Click="CancelButt_Click"
+                Margin="5"/>
     </Grid>
 </Window>
