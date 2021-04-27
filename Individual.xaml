@@ -49,11 +49,14 @@
             <TextBlock Text="Datum narození:" Grid.ColumnSpan="1"/>
             <StackPanel Orientation="Horizontal" Grid.ColumnSpan="4">
                 <TextBlock Text="Rok:"/>
-                <TextBox x:Name="YearBox" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" TextChanged="YearBox_TextChanged"/>
+                <TextBox x:Name="YearBox" Text="{Binding Year, UpdateSourceTrigger=PropertyChanged}" 
+                         TextChanged="YearBox_TextChanged" Margin="2"/>
                 <TextBlock Text="Měsíc:"/>
-                <TextBox x:Name="MonthBox" Text="{Binding Month, UpdateSourceTrigger=PropertyChanged}" TextChanged="MonthBox_TextChanged"/>
+                <TextBox x:Name="MonthBox" Text="{Binding Month, UpdateSourceTrigger=PropertyChanged}" 
+                         TextChanged="MonthBox_TextChanged" Margin="2"/>
                 <TextBlock Text="Den:"/>
-                <TextBox x:Name="DayBox" Text="{Binding Day, UpdateSourceTrigger=PropertyChanged}" TextChanged="DayBox_TextChanged"/>
+                <TextBox x:Name="DayBox" Text="{Binding Day, UpdateSourceTrigger=PropertyChanged}" 
+                         TextChanged="DayBox_TextChanged" Margin="2"/>
             </StackPanel>
             <TextBlock Text="{Binding BirthErrText, UpdateSourceTrigger=PropertyChanged}" Height="auto"
                        Visibility="{Binding BirthErrVis, UpdateSourceTrigger=PropertyChanged}" 

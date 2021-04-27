@@ -23,23 +23,20 @@ namespace PersonListManipulator
         public event PropertyChangedEventHandler PropertyChanged;
         bool AtemptedToSubmit { get; set; } = false;
         bool CreatingNew { get; set; } = false;
-        bool AllRight { get; set; } = false;
+        bool CalledByAdd { get; set; } = false;
 
-        static Person individual = new Person();
+        Person individual = new Person();
 
         //constructors
         public Individual()
         {
-            Person.ExistingPersons.Remove(individual);
-            individual = new Person();
             InitializeComponent();
             NameBox.DataContext = individual;
-            SurnameBox.DataContext = individual;
-            /*DayBox.DataContext = individual;
-            MonthBox.DataContext = individual;
-            YearBox.DataContext = individual;*/
             DataContext = this;
             CreatingNew = true;
+            year = individual.BirthDate.Year;
+            month = individual.BirthDate.Month;
+            day = individual.BirthDate.Day;
         }
 
         public Individual(Person aIndividual)
@@ -49,10 +46,10 @@ namespace PersonListManipulator
             individual = aIndividual;
             NameBox.DataContext = individual;
             SurnameBox.DataContext = individual;
-            /*DayBox.DataContext = individual;
-            MonthBox.DataContext = individual;
-            YearBox.DataContext = individual;*/
             DataContext = this;
+            year = individual.BirthDate.Year;
+            month = individual.BirthDate.Month;
+            day = individual.BirthDate.Day;
         }
 
 
@@ -132,7 +129,7 @@ namespace PersonListManipulator
 
         //birth date
         bool dayInvallid { get; set; } = false;
-        int day = individual.BirthDate.Day;
+        int day;
         public int Day
         {
             get { return day; }
@@ -148,7 +145,7 @@ namespace PersonListManipulator
             }
         }
         bool monthInvallid { get; set; } = false;
-        int month = individual.BirthDate.Month;
+        int month;
         public int Month
         {
             get { return month; }
@@ -164,7 +161,7 @@ namespace PersonListManipulator
             }
         }
         bool yearInvallid { get; set; } = false;
-        int year = individual.BirthDate.Year;
+        int year;
         public int Year
         {
             get { return year; }
@@ -231,7 +228,7 @@ namespace PersonListManipulator
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("BirthErrVis"));
             if (NameErrText == "" && SurnameErrText == "" && BirthErrText == "") 
             {
-                AllRight = true;    
+                CalledByAdd = true;    
                 Close(); 
             }
             else { MessageBox.Show("Některé položky nebyly vyplněny správně."); }
@@ -249,10 +246,10 @@ namespace PersonListManipulator
 
         protected override void OnClosed(EventArgs e)
         {
-            if (!CreatingNew && !AllRight) { MessageBox.Show("Editaci existující osoby nelze ukončit."); }
+            if (!CreatingNew && !CalledByAdd) { MessageBox.Show("Editaci existující osoby nelze ukončit."); }
             else
             {
-                if (Person.ExistingPersons.Contains(individual) && !AllRight && CreatingNew) { Person.ExistingPersons.Remove(individual); }
+                if (Person.ExistingPersons.Contains(individual) && !CalledByAdd && CreatingNew) { Person.ExistingPersons.Remove(individual); }
                 base.OnClosed(e);
             }
         }
