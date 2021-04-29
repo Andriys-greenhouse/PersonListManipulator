@@ -32,11 +32,12 @@ namespace PersonListManipulator
         {
             InitializeComponent();
             NameBox.DataContext = individual;
+            SurnameBox.DataContext = individual;
             DataContext = this;
             CreatingNew = true;
-            year = individual.BirthDate.Year;
-            month = individual.BirthDate.Month;
-            day = individual.BirthDate.Day;
+            Year = individual.BirthDate.Year.ToString();
+            Month = individual.BirthDate.Month.ToString();
+            Day = individual.BirthDate.Day.ToString();
         }
 
         public Individual(Person aIndividual)
@@ -47,9 +48,9 @@ namespace PersonListManipulator
             NameBox.DataContext = individual;
             SurnameBox.DataContext = individual;
             DataContext = this;
-            year = individual.BirthDate.Year;
-            month = individual.BirthDate.Month;
-            day = individual.BirthDate.Day;
+            Year = individual.BirthDate.Year.ToString();
+            Month = individual.BirthDate.Month.ToString();
+            Day = individual.BirthDate.Day.ToString();
         }
 
 
@@ -128,54 +129,9 @@ namespace PersonListManipulator
 
 
         //birth date
-        bool dayInvallid { get; set; } = false;
-        int day;
-        public int Day
-        {
-            get { return day; }
-            set
-            {
-                day = value;
-                try 
-                { 
-                    individual.BirthDate = new DateTime(Year, Month, value);
-                    dayInvallid = false;
-                }
-                catch (ArgumentException e) { dayInvallid = true; }
-            }
-        }
-        bool monthInvallid { get; set; } = false;
-        int month;
-        public int Month
-        {
-            get { return month; }
-            set
-            {
-                month = value;
-                try 
-                { 
-                    individual.BirthDate = new DateTime(Year, value, Day);
-                    monthInvallid = false;
-                }
-                catch (ArgumentException a) { monthInvallid = true; }
-            }
-        }
-        bool yearInvallid { get; set; } = false;
-        int year;
-        public int Year
-        {
-            get { return year; }
-            set
-            {
-                year = value;
-                try 
-                { 
-                    individual.BirthDate = new DateTime(value, Month, Day);
-                    yearInvallid = false;
-                }
-                catch (ArgumentException e) { yearInvallid = true; }
-            }
-        }
+        public string Day { get; set; }
+        public string Month { get; set; }
+        public string Year { get; set; }
         private void DayBox_TextChanged(object sender, TextChangedEventArgs e)
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Day"));
@@ -200,8 +156,13 @@ namespace PersonListManipulator
         {
             get
             {
-                if ((yearInvallid || monthInvallid ||dayInvallid) && AtemptedToSubmit) { return "Špatně zadaný rok, měsíc nebo den."; }
-                else { return ""; }
+                try
+                {
+                    individual.BirthDate = new DateTime(int.Parse(Year), int.Parse(Month), int.Parse(Day));
+                }
+                catch (ArgumentException a) { if (AtemptedToSubmit) { return "Špatně zadaný rok, měsíc nebo den."; } }
+                catch (FormatException a) { if (AtemptedToSubmit) { return "Špatně zadaný rok, měsíc nebo den."; } }
+                return ""; 
             }
         }
 

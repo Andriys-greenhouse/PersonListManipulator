@@ -40,6 +40,7 @@ namespace PersonListManipulator
         private void Add_Click(object sender, RoutedEventArgs e)
         {
             new Individual().ShowDialog();
+            
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
